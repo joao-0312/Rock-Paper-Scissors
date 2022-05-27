@@ -11,37 +11,39 @@ playerSelection.forEach((button) => {
 })     
 
 function round(playerSelection) {
+    const showResults = document.querySelector("#roundResult")
+
     computerSelection = computerPlay();
     
     playerPoints = 0;
     computerPoints = 0;
     
     if (playerSelection == computerSelection) {
-        console.log("It's a tie!")
+        showResults.textContent = "It's a tie!"
         return "tie";
     }
     if (playerSelection == "Rock" && computerSelection == "Scissors") {
-        console.log(`You won! ${playerSelection} beats ${computerSelection}`)
+        showResults.textContent = `You won! ${playerSelection} beats ${computerSelection}`
         return "player";
     }
     if (playerSelection == "Rock" && computerSelection == "Paper") {
-        console.log(`You lose! ${computerSelection} beats ${playerSelection}`)
+        showResults.textContent = `You lose! ${computerSelection} beats ${playerSelection}`
         return "computer";
     }
     if (playerSelection == "Paper" && computerSelection == "Rock") {
-        console.log(`You won! ${playerSelection} beats ${computerSelection}`)
+        showResults.textContent = `You won! ${playerSelection} beats ${computerSelection}`
         return "player";
     }
     if (playerSelection == "Paper" && computerSelection == "Scissors") {
-        console.log(`You lose! ${computerSelection} beats ${playerSelection}`)
+        showResults.textContent = `You lose! ${computerSelection} beats ${playerSelection}`
         return "computer";
     }
     if (playerSelection == "Scissors" && computerSelection == "Paper") {
-        console.log(`You won! ${playerSelection} beats ${computerSelection}`)
+        showResults.textContent = `You won! ${playerSelection} beats ${computerSelection}`
         return "player";
     }
     if (playerSelection == "Scissors" && computerSelection == "Rock") {
-        console.log(`You lose! ${computerSelection} beats ${playerSelection}`)
+        showResults.textContent = `You lose! ${computerSelection} beats ${playerSelection}`
         return "computer";
     } 
 }
