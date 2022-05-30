@@ -8,17 +8,24 @@ const tieAmount = document.querySelector("#tieAmount");
 
 const playerSelection = document.querySelectorAll('.play');    
 playerSelection.forEach((button) => {
-    button.addEventListener('click', () => {
-        roundResult = round(button.id);
-        if (roundResult == "player") playerScore++;
-        else if (roundResult == "computer") computerScore++;
-        else ties++;
-
-        playerPoints.textContent = `Your score: ${playerScore}`;
-        tieAmount.textContent = `Ties: ${ties}`;
-        computerPoints.textContent = `Computer score: ${computerScore}`;
-    });
+    button.addEventListener('click', game);
 }) 
+
+function game() {
+    if (playerScore >= 5 || computerScore >= 5) {
+        this.removeEventListener('click', game);
+        return;
+    }
+
+    roundResult = round(this.id);
+    if (roundResult == "player") playerScore++;
+    else if (roundResult == "computer") computerScore++;
+    else ties++;
+
+    playerPoints.textContent = `Your score: ${playerScore}`;
+    tieAmount.textContent = `Ties: ${ties}`;
+    computerPoints.textContent = `Computer score: ${computerScore}`;
+}
 
 function computerPlay() {
     let plays = ["Rock", "Paper", "Scissors"];
