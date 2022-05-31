@@ -13,6 +13,7 @@ playerSelection.forEach((button) => {
 
 function game() {
     if (playerScore >= 5 || computerScore >= 5) {
+        hideScores();
         this.removeEventListener('click', game);
         return;
     }
@@ -25,6 +26,14 @@ function game() {
     playerPoints.textContent = `Your score: ${playerScore}`;
     tieAmount.textContent = `Ties: ${ties}`;
     computerPoints.textContent = `Computer score: ${computerScore}`;
+}
+
+function hideScores() {
+    roundResult = document.querySelector("#roundResult");
+    scores = document.querySelector("#scores");
+
+    roundResult.style.display = "none";
+    scores.style.display = "none";
 }
 
 function computerPlay() {
