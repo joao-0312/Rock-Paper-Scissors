@@ -2,6 +2,7 @@ let playerScore = 0;
 let computerScore = 0;
 let ties = 0; 
 
+const body = document.querySelector("#body");
 const playerPoints = document.querySelector("#playerPoints");
 const computerPoints = document.querySelector("#computerPoints");
 const tieAmount = document.querySelector("#tieAmount");
@@ -12,8 +13,15 @@ playerSelection.forEach((button) => {
 }) 
 
 function game() {
-    if (playerScore >= 5 || computerScore >= 5) {
+    if (playerScore >= 5) {
         hideScores();
+        displayWinner("player");
+        this.removeEventListener('click', game);
+        return;
+    }
+    if (computerScore >= 5) {
+        hideScores();
+        displayWinner("computer");
         this.removeEventListener('click', game);
         return;
     }
@@ -34,6 +42,19 @@ function hideScores() {
 
     roundResult.style.display = "none";
     scores.style.display = "none";
+}
+
+function displayWinner(winner) {
+    const gameResult = document.createElement('div');
+    
+    if (winner === "player") {
+        gameResult.textContent = "Congratulations! You won!"
+    }
+    if (winner === "computer") {
+        gameResult.textContent = "You lost! But don't give up!"
+    }
+
+    body.appendChild(gameResult);
 }
 
 function computerPlay() {
