@@ -11,18 +11,24 @@ const playerSelection = document.querySelectorAll('.play');
 playerSelection.forEach((button) => {
     button.addEventListener('click', game);
 }) 
+let playerSelectionDisplay = document.querySelector("#playerSelection");
+let computerSelectionDisplay = document.querySelector("#computerSelection");
 
 function game() {
     if (playerScore >= 5) {
+        playerSelection.forEach((button) => {
+            button.removeEventListener('click', game);
+        });
         hideScores();
         displayWinner("player");
-        this.removeEventListener('click', game);
         return;
     }
     if (computerScore >= 5) {
+        playerSelection.forEach((button) => {
+            button.removeEventListener('click', game);
+        });
         hideScores();
         displayWinner("computer");
-        this.removeEventListener('click', game);
         return;
     }
 
@@ -34,6 +40,9 @@ function game() {
     playerPoints.textContent = `Your score: ${playerScore}`;
     tieAmount.textContent = `Ties: ${ties}`;
     computerPoints.textContent = `Computer score: ${computerScore}`;
+
+    playerSelectionDisplay.textContent = this.id;
+    computerSelectionDisplay.textContent = computerSelection;
 }
 
 function hideScores() {
@@ -51,7 +60,7 @@ function displayWinner(winner) {
         gameResult.textContent = "Congratulations! You won!"
     }
     if (winner === "computer") {
-        gameResult.textContent = "You lost! But don't give up!"
+        gameResult.textContent = "You lost this time! Don't give up!"
     }
 
     body.appendChild(gameResult);
@@ -59,7 +68,9 @@ function displayWinner(winner) {
 
 function computerPlay() {
     let plays = ["Rock", "Paper", "Scissors"];
-    return plays[Math.floor(Math.random() * plays.length)];
+    let selection = plays[Math.floor(Math.random() * plays.length)];
+    computerSelection;
+    return selection
 }    
 
 function round(playerSelection) {
