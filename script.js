@@ -2,7 +2,7 @@ let playerScore = 0;
 let computerScore = 0;
 let ties = 0; 
 
-const body = document.querySelector("#body");
+const main = document.querySelector("main");
 const playerPoints = document.querySelector("#playerPoints");
 const computerPoints = document.querySelector("#computerPoints");
 const tieAmount = document.querySelector("#tieAmount");
@@ -15,6 +15,18 @@ let playerSelectionDisplay = document.querySelector("#playerSelection");
 let computerSelectionDisplay = document.querySelector("#computerSelection");
 
 function game() {
+    roundResult = round(this.id);
+    if (roundResult == "player") playerScore++;
+    else if (roundResult == "computer") computerScore++;
+    else ties++;
+
+    playerPoints.textContent = `Your score: ${playerScore}`;
+    tieAmount.textContent = `Ties: ${ties}`;
+    computerPoints.textContent = `Computer score: ${computerScore}`;
+
+    playerSelectionDisplay.textContent = this.id;
+    computerSelectionDisplay.textContent = computerSelection;
+
     if (playerScore >= 5) {
         playerSelection.forEach((button) => {
             button.removeEventListener('click', game);
@@ -31,18 +43,6 @@ function game() {
         displayWinner("computer");
         return;
     }
-
-    roundResult = round(this.id);
-    if (roundResult == "player") playerScore++;
-    else if (roundResult == "computer") computerScore++;
-    else ties++;
-
-    playerPoints.textContent = `Your score: ${playerScore}`;
-    tieAmount.textContent = `Ties: ${ties}`;
-    computerPoints.textContent = `Computer score: ${computerScore}`;
-
-    playerSelectionDisplay.textContent = this.id;
-    computerSelectionDisplay.textContent = computerSelection;
 }
 
 function hideScores() {
@@ -63,7 +63,7 @@ function displayWinner(winner) {
         gameResult.textContent = "You lost this time! Don't give up!"
     }
 
-    body.appendChild(gameResult);
+    main.appendChild(gameResult);
 }
 
 function computerPlay() {
